@@ -1,0 +1,197 @@
+---
+---
+<section class="process-section" id="proceso">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>El Camino hacia tu <span class="text-gold">Empresa</span></h2>
+      <p>Un proceso estructurado, transparente y ágil. Nosotros nos encargamos de la complejidad legal y burocrática del Registro Público en Tucumán.</p>
+    </div>
+
+    <div class="timeline">
+      <!-- Paso 1 -->
+      <div class="timeline-item reveal delay-100">
+        <div class="step-bg-number">01</div>
+        <div class="timeline-marker">1</div>
+        <div class="timeline-content glass-panel">
+          <h3>Asesoramiento y Planificación</h3>
+          <p>Definimos el objeto social, composición del capital y la estructura de administración ideal para tu modelo de negocio.</p>
+        </div>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="timeline-item reveal delay-200">
+        <div class="step-bg-number">02</div>
+        <div class="timeline-marker">2</div>
+        <div class="timeline-content glass-panel">
+          <h3>Redacción y Firma</h3>
+          <p>Confeccionamos el Instrumento Constitutivo adecuado. Coordinamos la firma mediante escribanía local con certificación de identidades.</p>
+        </div>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="timeline-item reveal delay-300">
+        <div class="step-bg-number">03</div>
+        <div class="timeline-marker">3</div>
+        <div class="timeline-content glass-panel">
+          <h3>Presentación Registral</h3>
+          <p>Ingresamos el expediente en el Registro Público de Comercio de Tucumán. Realizamos el seguimiento y contestamos vistas legales.</p>
+        </div>
+      </div>
+
+      <!-- Paso 4 -->
+      <div class="timeline-item reveal delay-400">
+        <div class="step-bg-number">04</div>
+        <div class="timeline-marker">4</div>
+        <div class="timeline-content glass-panel featured-step">
+          <h3>Sociedad Constituida y CUIT</h3>
+          <p>Entrega de los instrumentos inscriptos legalmente, obtención del CUIT ante AFIP y apertura de libros societarios y contables.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-section {
+    padding: 100px 0;
+    position: relative;
+    background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.02) 50%, transparent 100%);
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .section-header p {
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 24px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 70px;
+  }
+
+  .step-bg-number {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(80px, 12vw, 140px);
+    font-weight: 700;
+    color: var(--accent-gold);
+    opacity: 0.04;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 2px solid var(--accent-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    z-index: 2;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease;
+  }
+
+  .timeline-item:hover .timeline-marker {
+    transform: scale(1.1);
+    background: var(--accent-gold);
+    color: #000;
+  }
+
+  .timeline-content {
+    padding: 2rem;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+
+  .timeline-content:hover {
+    transform: translateX(10px);
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+  
+  .featured-step {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, var(--glass-bg) 100%);
+    border-color: rgba(212, 175, 55, 0.2);
+  }
+
+  h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-primary);
+  }
+  
+  .featured-step h3 {
+    color: var(--accent-gold);
+  }
+
+  p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 768px) {
+    .timeline::before {
+      left: 20px;
+    }
+    
+    .timeline-marker {
+      width: 42px;
+      height: 42px;
+      font-size: 1rem;
+    }
+    
+    .timeline-item {
+      padding-left: 60px;
+    }
+    
+    .timeline-content {
+      padding: 1.5rem;
+    }
+  }
+</style>

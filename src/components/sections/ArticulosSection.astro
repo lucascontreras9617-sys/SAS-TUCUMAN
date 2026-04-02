@@ -1,0 +1,213 @@
+---
+import { getCollection } from 'astro:content';
+
+const articulos = (await getCollection('articulos'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('es-AR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<section class="articles-section" id="articulos">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Artículos de <span class="text-gold">Interés</span></h2>
+      <p>Publicaciones y análisis de nuestro equipo jurídico sobre temas relevantes del mundo societario y empresarial en Tucumán.</p>
+    </div>
+
+    <div class="articles-grid">
+      {articulos.map((articulo, idx) => (
+        <article class={`article-card glass-panel reveal delay-${(idx + 1) * 100}`}>
+          <div class="article-category">
+            <span class="category-tag">{articulo.data.category}</span>
+          </div>
+          <div class="article-body">
+            <h3>{articulo.data.title}</h3>
+            <p class="article-excerpt">{articulo.data.description}</p>
+          </div>
+          <div class="article-meta">
+            <div class="meta-left">
+              <span class="author">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                {articulo.data.author}
+              </span>
+              <span class="date">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                {formatDate(articulo.data.date)}
+              </span>
+            </div>
+            <a href={`/articulos/${articulo.slug}`} class="read-more">
+              Leer más
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12H19"></path>
+                <path d="M12 5L19 12L12 19"></path>
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .articles-section {
+    padding: 100px 0;
+    position: relative;
+    background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.02) 50%, transparent 100%);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-header p {
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .article-card {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .article-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .article-category {
+    padding: 1.5rem 2rem 0;
+  }
+
+  .category-tag {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    background: var(--accent-muted);
+    color: var(--accent-gold);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Outfit', sans-serif;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+  }
+
+  .article-body {
+    padding: 1.2rem 2rem 1.5rem;
+    flex-grow: 1;
+  }
+
+  .article-body h3 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 0.8rem;
+    line-height: 1.35;
+    transition: color 0.3s ease;
+  }
+
+  .article-card:hover .article-body h3 {
+    color: var(--accent-gold);
+  }
+
+  .article-excerpt {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .article-meta {
+    padding: 1rem 2rem 1.5rem;
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .meta-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .author, .date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .author svg, .date svg {
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-gold);
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    transition: gap 0.3s ease, opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .read-more:hover {
+    gap: 10px;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 992px) {
+    .articles-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

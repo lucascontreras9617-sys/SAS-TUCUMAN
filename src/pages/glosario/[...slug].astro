@@ -1,0 +1,128 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const glosarioEntries = await getCollection('glosario');
+  return glosarioEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<BaseLayout title={`${entry.data.title} | Glosario SAS`}>
+  <article class="glossary-article container">
+    <a href="/#conocimiento" class="magnetic-link back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Volver al Inicio
+    </a>
+    
+    <div class="article-content glass-panel reveal active">
+      <header>
+        <span class="badge font-sans">Diccionario Legal</span>
+        <h1>{entry.data.title}</h1>
+        <p class="lead">{entry.data.description}</p>
+      </header>
+      
+      <div class="content-body wrapper-format">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .glossary-article {
+    padding: 140px 0 100px;
+    max-width: 800px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    transition: color var(--transition-smooth), transform var(--transition-smooth);
+    font-size: 0.95rem;
+  }
+
+  .back-link svg {
+    width: 20px;
+    height: 20px;
+    transition: transform var(--transition-smooth);
+  }
+
+  .back-link:hover {
+    color: var(--accent-gold);
+    transform: translateX(-4px);
+  }
+
+  .article-content {
+    padding: 4rem 3rem;
+  }
+
+  header {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .lead {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Formato para el Markdown generado */
+  .wrapper-format :global(h2),
+  .wrapper-format :global(h3) {
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+  }
+
+  .wrapper-format :global(p) {
+    color: rgba(255,255,255,0.75);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+  }
+  
+  .wrapper-format :global(strong) {
+    color: var(--accent-gold);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .article-content {
+      padding: 2.5rem 1.5rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+    }
+  }
+</style>

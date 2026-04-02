@@ -1,0 +1,198 @@
+---
+---
+<section class="cta-section" id="contacto">
+  <div class="container">
+    <div class="cta-box glass-panel reveal">
+      <div class="cta-content">
+        <h2>Da el siguiente paso legal</h2>
+        <p>¿Listo para constituir tu empresa en Tucumán con total resguardo patrimonial? Nuestro equipo jurídico está listo para asesorarte.</p>
+        
+        <form class="contact-form" id="main-contact-form">
+          <div class="form-group">
+            <input type="text" name="nombre" placeholder="Nombre completo" required />
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Correo electrónico" required />
+          </div>
+          <div class="form-group">
+            <textarea name="idea" placeholder="Contanos brevemente sobre tu proyecto o duda..." rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" id="submit-btn">Consultar Ahora</button>
+          <div id="form-message" class="form-message hidden"></div>
+        </form>
+      </div>
+
+      <div class="cta-glow"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding: 80px 0 140px;
+  }
+
+  .cta-box {
+    position: relative;
+    padding: 5rem 3rem;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    /* Fondo adaptativo con tinte gold */
+    background: linear-gradient(135deg, var(--glass-bg), rgba(212, 175, 55, 0.05));
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  p {
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    gap: 1rem;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color var(--transition-smooth);
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    background: var(--glass-bg);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--text-secondary);
+  }
+
+  .form-submit {
+    margin-top: 0.5rem;
+    width: 100%;
+    font-size: 1.05rem;
+    padding: 1rem;
+  }
+
+  .cta-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 60%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .cta-box {
+      padding: 3rem 1.5rem;
+    }
+    
+    .form-group {
+      flex-direction: column;
+    }
+  }
+
+  /* Form Message Styles */
+  .form-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: opacity var(--transition-smooth);
+  }
+  
+  .form-message.hidden {
+    display: none;
+    opacity: 0;
+  }
+  
+  .form-message.success {
+    background: rgba(37, 211, 102, 0.1);
+    color: #25d366;
+    border: 1px solid rgba(37, 211, 102, 0.3);
+  }
+  
+  .form-message.error {
+    background: rgba(211, 37, 37, 0.1);
+    color: #ff4d4d;
+    border: 1px solid rgba(211, 37, 37, 0.3);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('main-contact-form') as HTMLFormElement;
+    const msgDiv = document.getElementById('form-message');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+
+    if(form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Enviando...';
+        
+        const formData = new FormData(form);
+        
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            body: formData
+          });
+          
+          if(response.ok && msgDiv) {
+            msgDiv.classList.remove('hidden', 'error');
+            msgDiv.classList.add('success');
+            msgDiv.textContent = '¡Mensaje enviado con éxito! Nos comunicaremos a la brevedad.';
+            form.reset();
+          } else {
+            throw new Error('Error en el servidor');
+          }
+        } catch (error) {
+          if(msgDiv) {
+            msgDiv.classList.remove('hidden', 'success');
+            msgDiv.classList.add('error');
+            msgDiv.textContent = 'Ocurrió un error. Inténtalo de nuevo.';
+          }
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Consultar Ahora';
+        }
+      });
+    }
+  });
+</script>

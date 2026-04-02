@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+
+const glosarioEntries = await getCollection('glosario');
+// Mostrar maximo 3 en la landing
+const topEntries = glosarioEntries.slice(0, 3);
+---
+<section class="glossary-section" id="conocimiento">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Transparencia y <span class="text-gold">Saber Legal</span></h2>
+      <p>Creemos en dotar a nuestros clientes de herramientas e información clave. Explora nuestro diccionario de ingeniería societaria.</p>
+    </div>
+
+    <div class="glossary-grid">
+      {topEntries.map((entry, index) => (
+        <a href={`/glosario/${entry.slug}`} class={`glossary-card glass-panel magnetic-link reveal delay-${(index+1)*100}`}>
+          <div class="glow-hover"></div>
+          <h3>{entry.data.title}</h3>
+          <p>{entry.data.description}</p>
+          <div class="read-more">
+            <span>Leer definición</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .glossary-section {
+    padding: 100px 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .section-header p {
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .glossary-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    height: 100%;
+    text-decoration: none;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+  
+  .glossary-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212, 175, 55, 0.4);
+  }
+
+  .glossary-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .glossary-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    flex-grow: 1;
+  }
+
+  .read-more {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent-gold);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: gap var(--transition-smooth);
+  }
+
+  .read-more svg {
+    width: 18px;
+    height: 18px;
+    transition: transform var(--transition-smooth);
+  }
+
+  .glossary-card:hover .read-more {
+    gap: 12px;
+  }
+</style>

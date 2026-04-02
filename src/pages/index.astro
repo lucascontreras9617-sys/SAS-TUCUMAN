@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Stats from '../components/sections/Stats.astro';
+import QueEsSAS from '../components/sections/QueEsSAS.astro';
+import Proceso from '../components/sections/Proceso.astro';
+import GlossarySection from '../components/sections/GlossarySection.astro';
+import Precios from '../components/sections/Precios.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import ArticulosSection from '../components/sections/ArticulosSection.astro';
+import CTASection from '../components/sections/CTASection.astro';
+import TrustBadges from '../components/sections/TrustBadges.astro';
+---
+
+<BaseLayout title="Constituir SAS en Tucumán">
+  <Hero />
+  <TrustBadges />
+  <Stats />
+  <QueEsSAS />
+  <Proceso />
+  <GlossarySection />
+  <Precios />
+  <FAQ />
+  <ArticulosSection />
+  <CTASection />
+  
+  <footer class="footer">
+    <div class="footer-watermark" aria-hidden="true">SAS&nbsp;Tucumán</div>
+    <div class="footer-top-line"></div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="brand-text">SAS <span class="text-gold">Tucumán</span></span>
+          <p class="branding-text">Estudio Jurídico Especializado en Derecho Societario e Ingeniería Legal Patrimonial.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Vínculos Rápidos</h4>
+          <ul>
+            <li><a href="#que-es" class="magnetic-link">Beneficios</a></li>
+            <li><a href="#conocimiento" class="magnetic-link">Glosario Legal</a></li>
+            <li><a href="#honorarios" class="magnetic-link">Honorarios</a></li>
+            <li><a href="#articulos" class="magnetic-link">Artículos</a></li>
+            <li><a href="#faq" class="magnetic-link">Preguntas</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Operaciones</h4>
+          <ul>
+            <li>San Miguel de Tucumán, Argentina</li>
+            <li>Lunes a Viernes 09:00 - 18:00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SAS Tucumán. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  /* Footer Rediseñado */
+  .footer {
+    background: var(--bg-secondary);
+    padding: 80px 0 30px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Línea dorada superior del footer */
+  .footer-top-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    margin-bottom: 60px;
+    opacity: 0.5;
+  }
+
+  /* Marca de agua tipográfica */
+  .footer-watermark {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(80px, 15vw, 180px);
+    font-weight: 700;
+    color: var(--accent-gold);
+    opacity: 0.025;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+  
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .brand-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  
+  .branding-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    max-width: 300px;
+    line-height: 1.6;
+  }
+  
+  h4 {
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+  }
+  
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  ul li, ul li a {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+  }
+  
+  ul li a:hover {
+    color: var(--accent-gold);
+  }
+  
+  .footer-bottom {
+    padding-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.5;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,182 @@
+---
+---
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Preguntas <span class="text-gold">Frecuentes</span></h2>
+      <p>Resolvemos las dudas más habituales sobre la constitución de tu Sociedad por Acciones Simplificada.</p>
+    </div>
+
+    <div class="faq-container reveal delay-200">
+      <div class="faq-item glass-panel">
+        <button class="faq-question">
+          <span>¿Cuánto demora la constitución de una SAS en Tucumán?</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Usualmente el trámite se completa en 24 a 48 horas hábiles una vez presentados los documentos correctamente firmados. Somos especialistas en agilizar el circuito en el Registro Público local.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item glass-panel">
+        <button class="faq-question">
+          <span>¿Necesito un capital mínimo muy alto?</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>A diferencia de las SA tradicionales, la SAS exige un capital mínimo equivalente a dos (2) Salarios Mínimos Vitales y Móviles, y sólo requerís integrar el 25% al momento de la constitución.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item glass-panel">
+        <button class="faq-question">
+          <span>¿Puede constituirse con un solo socio?</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Sí, una de las mayores ventajas de la SAS es que admite la sociedad unipersonal. Podés ser el único dueño y administrador de tu empresa desde el día uno.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item glass-panel">
+        <button class="faq-question">
+          <span>¿Están incluidos los gastos de escribanía en los honorarios?</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <div class="answer-content">
+            <p>Nuestros planes cubren la redacción, el trabajo profesional jurídico y la gestión integral. Los gastos de certificación de firma y sellados provinciales son costos de terceros que te presupuestamos con transparencia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    padding: 80px 0 120px;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  
+  .section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .section-header p {
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .faq-item {
+    overflow: hidden;
+    transition: all var(--transition-smooth);
+  }
+  
+  .faq-item:hover {
+    border-color: rgba(212, 175, 55, 0.3);
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-align: left;
+    transition: color 0.3s ease;
+  }
+
+  .faq-question:hover {
+    color: var(--accent-gold);
+  }
+
+  .chevron {
+    width: 20px;
+    height: 20px;
+    transition: transform var(--transition-smooth);
+  }
+
+  .faq-item.active .chevron {
+    transform: rotate(180deg);
+    color: var(--accent-gold);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+  }
+
+  .faq-item.active .faq-answer {
+    max-height: 1000px;
+    transition: max-height 0.8s cubic-bezier(1, 0, 1, 0);
+  }
+
+  .answer-content {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    border-top: 1px solid transparent;
+  }
+  
+  .faq-item.active .answer-content {
+    border-top-color: rgba(255,255,255,0.05);
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question?.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        
+        // Cierra los demás
+        faqItems.forEach(otherItem => {
+          otherItem.classList.remove('active');
+        });
+
+        // Toggle actual
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+  });
+</script>

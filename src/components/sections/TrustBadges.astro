@@ -1,0 +1,142 @@
+---
+---
+<section class="trust-badges-section">
+  <div class="container">
+    <p class="section-label font-sans reveal">Procesos estandarizados bajo normativas de:</p>
+    <div class="marquee-wrapper reveal delay-200">
+      <div class="marquee">
+        <!-- Bloque duplicado para el scroll infinito -->
+        <div class="marquee-content">
+          <div class="badge-item">
+            <i>Inspección General de Justicia</i>
+          </div>
+          <div class="badge-item">
+            <span>Registro Público de Comercio</span>
+          </div>
+          <div class="badge-item">
+            <i>AFIP</i>
+          </div>
+          <div class="badge-item">
+            <span>Ley 27.349 (Apoyo al Capital Emprendedor)</span>
+          </div>
+          <div class="badge-item">
+            <i>Colegio de Abogados de Tucumán</i>
+          </div>
+          <div class="badge-item">
+            <span>Firma Digital Certificada</span>
+          </div>
+        </div>
+        <div class="marquee-content" aria-hidden="true">
+          <div class="badge-item">
+            <i>Inspección General de Justicia</i>
+          </div>
+          <div class="badge-item">
+            <span>Registro Público de Comercio</span>
+          </div>
+          <div class="badge-item">
+            <i>AFIP</i>
+          </div>
+          <div class="badge-item">
+            <span>Ley 27.349 (Apoyo al Capital Emprendedor)</span>
+          </div>
+          <div class="badge-item">
+            <i>Colegio de Abogados de Tucumán</i>
+          </div>
+          <div class="badge-item">
+            <span>Firma Digital Certificada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-badges-section {
+    padding: 2rem 0 4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(180deg, rgba(10,10,12,0) 0%, rgba(18,18,21,0.5) 100%);
+    position: relative;
+    z-index: 5;
+  }
+  
+  .section-label {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+  }
+
+  .marquee-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    /* Efecto de fade en los bordes */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+
+  .marquee {
+    display: flex;
+    width: fit-content;
+  }
+
+  .marquee-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    padding-right: 4rem;
+    animation: scroll 30s linear infinite;
+  }
+
+  .badge-item {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.1rem;
+    white-space: nowrap;
+    transition: color var(--transition-smooth);
+    display: flex;
+    align-items: center;
+  }
+
+  .badge-item i {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+  }
+  
+  .badge-item span {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+  }
+
+  .badge-item:hover {
+    color: var(--text-primary);
+  }
+
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .trust-badges-section {
+      padding: 1rem 0 3rem;
+    }
+    .marquee-content {
+      gap: 2.5rem;
+      padding-right: 2.5rem;
+    }
+    .badge-item {
+      font-size: 0.95rem;
+    }
+    .badge-item i {
+      font-size: 1.1rem;
+    }
+  }
+</style>

@@ -1,0 +1,217 @@
+---
+import ThemeToggle from '../ui/ThemeToggle.astro';
+---
+
+<header class="navbar" id="main-navbar">
+  <div class="container nav-content">
+    <a href="/" class="brand">
+      <span class="brand-text">SAS <span class="text-gold">Tucumán</span></span>
+    </a>
+    
+    <nav class="desktop-nav">
+      <ul id="nav-list">
+        <li><a href="#que-es"    class="nav-link" data-section="que-es">¿Qué es?</a></li>
+        <li><a href="#proceso"   class="nav-link" data-section="proceso">Proceso</a></li>
+        <li><a href="#honorarios" class="nav-link" data-section="honorarios">Honorarios</a></li>
+        <li><a href="#articulos" class="nav-link" data-section="articulos">Artículos</a></li>
+        <li><a href="#faq"       class="nav-link" data-section="faq">Preguntas</a></li>
+      </ul>
+      <!-- Indicador deslizante dorado -->
+      <div class="nav-indicator" id="nav-indicator"></div>
+      <div class="nav-actions">
+        <ThemeToggle />
+        <a href="#contacto" class="btn-primary btn-sm">Iniciar Trámite</a>
+      </div>
+    </nav>
+    
+    <!-- Mobile toggle -->
+    <button class="mobile-toggle" aria-label="Abrir menú" id="mobile-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.5rem 0;
+    transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: padding, background;
+  }
+  
+  .navbar.scrolled {
+    padding: 0.8rem 0;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+  }
+
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    transition: opacity var(--transition-smooth);
+  }
+  
+  .brand:hover { opacity: 0.8; }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    position: relative;
+  }
+
+  .desktop-nav ul {
+    display: flex;
+    gap: 0.25rem;
+    position: relative;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: color 0.25s ease, background-color 0.25s ease;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--text-primary);
+  }
+
+  /* Indicador deslizante dorado */
+  .nav-indicator {
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--accent-gold);
+    border-radius: 2px;
+    transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.35s ease;
+    opacity: 0;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+    pointer-events: none;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .btn-sm {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .bar {
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  @media (max-width: 768px) {
+    .desktop-nav { display: none; }
+    .mobile-toggle { display: flex; }
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    function initNav() {
+      var navbar  = document.getElementById('main-navbar');
+      var navLinks = document.querySelectorAll('.nav-link[data-section]');
+      var indicator = document.getElementById('nav-indicator');
+
+      /* ── Scroll class ── */
+      function onScroll() {
+        if (!navbar) return;
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+        updateActive();
+      }
+
+      /* ── Scroll Spy: mover indicador ── */
+      function updateActive() {
+        var sections = Array.from(navLinks).map(function(link) {
+          return document.getElementById(link.getAttribute('data-section') || '');
+        });
+
+        var activeIndex = -1;
+        sections.forEach(function(section, i) {
+          if (!section) return;
+          var rect = section.getBoundingClientRect();
+          if (rect.top <= 120 && rect.bottom > 120) {
+            activeIndex = i;
+          }
+        });
+
+        navLinks.forEach(function(link, i) {
+          link.classList.toggle('active', i === activeIndex);
+        });
+
+        // Mover el indicador
+        if (activeIndex >= 0 && indicator) {
+          var activeLink = navLinks[activeIndex];
+          var linkRect = activeLink.getBoundingClientRect();
+          var navRect = activeLink.closest('ul').getBoundingClientRect();
+
+          indicator.style.left  = (linkRect.left - navRect.left + 6) + 'px';
+          indicator.style.width = (linkRect.width - 12) + 'px';
+          indicator.style.opacity = '1';
+        } else if (indicator) {
+          indicator.style.opacity = '0';
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    initNav();
+    document.addEventListener('astro:page-load', initNav);
+  })();
+</script>

@@ -1,0 +1,109 @@
+---
+---
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<style>
+  /* Solo mostrar custom cursor en dispositivos Desktop que soporten hover real */
+  @media (pointer: fine) {
+    body {
+      cursor: none;
+    }
+  }
+
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-gold);
+    border-radius: 50%;
+    z-index: 10000;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--accent-gold);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+    /* La interpolación espacial del anillo se hará mediante JS */
+  }
+
+  /* Estados Magnéticos/Hover */
+  .cursor-dot.jelly {
+    width: 4px;
+    height: 4px;
+  }
+
+  .cursor-ring.jelly {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(212, 175, 55, 0.1);
+    border-color: transparent;
+  }
+</style>
+
+<script>
+  if (matchMedia('(pointer: fine)').matches) {
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    
+    let ringX = mouseX;
+    let ringY = mouseY;
+
+    // Velocidad de interpolación
+    const speed = 0.15;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      // El punto sigue al cursor directamente
+      if(dot) dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    });
+
+    const animate = () => {
+      // Interpolación lineal para suavizar el anillo
+      ringX += (mouseX - ringX) * speed;
+      ringY += (mouseY - ringY) * speed;
+
+      if(ring) ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    // Lógica magnética para enlaces y botones
+    const addMagneticListeners = () => {
+      const clickables = document.querySelectorAll('a, button, .faq-item, .glass-panel');
+      clickables.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          dot?.classList.add('jelly');
+          ring?.classList.add('jelly');
+        });
+        el.addEventListener('mouseleave', () => {
+           dot?.classList.remove('jelly');
+           ring?.classList.remove('jelly');
+        });
+      });
+    }
+    
+    // Inicializar listeners, incluso tras cargar la app
+    addMagneticListeners();
+  }
+</script>
