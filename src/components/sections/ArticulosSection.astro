@@ -122,7 +122,7 @@ function formatDate(date: Date): string {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-display);
     border: 1px solid rgba(212, 175, 55, 0.15);
   }
 
@@ -174,7 +174,7 @@ function formatDate(date: Date): string {
     gap: 6px;
     color: var(--text-secondary);
     font-size: 0.78rem;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-body);
   }
 
   .author svg, .date svg {
@@ -189,7 +189,9 @@ function formatDate(date: Date): string {
     color: var(--accent-gold);
     font-size: 0.85rem;
     font-weight: 600;
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     transition: gap 0.3s ease, opacity 0.3s ease;
     white-space: nowrap;
   }

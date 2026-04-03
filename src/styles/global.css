@@ -1,5 +1,5 @@
 /* src/styles/global.css */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root[data-theme="dark"] {
   --bg-primary: #0a0a0c;
@@ -57,6 +57,10 @@
   --transition-smooth: 0.35s var(--ease-out-quart);
   --transition-bounce: 0.55s var(--ease-spring);
   --transition-fast:   0.2s var(--ease-out-expo);
+
+  /* Typography Variables */
+  --font-display: 'League Spartan', sans-serif;
+  --font-body: 'Libre Baskerville', serif;
 }
 
 * {
@@ -70,7 +74,7 @@ html {
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -94,14 +98,14 @@ body::after {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .font-sans {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-body);
 }
 
 a {
@@ -265,7 +269,10 @@ button {
   padding: 0.8rem 2rem;
   background-color: var(--accent-gold);
   color: #000;
-  font-weight: 600;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
   border-radius: 8px;
   transition: background-color var(--transition-fast),
               transform var(--transition-bounce),
@@ -307,6 +314,9 @@ button {
   padding: 0.8rem 2rem;
   background-color: transparent;
   color: var(--text-primary);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   font-weight: 500;
   border: 1px solid var(--btn-secondary-border, var(--glass-border));
   border-radius: 8px;
