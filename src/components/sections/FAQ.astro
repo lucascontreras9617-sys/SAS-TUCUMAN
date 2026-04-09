@@ -10,14 +10,14 @@
     <div class="faq-container reveal delay-200">
       <div class="faq-item glass-panel">
         <button class="faq-question">
-          <span>¿Cuánto demora la constitución de una SAS en Tucumán?</span>
+          <span>¿Cuánto demora la constitución de una SAS?</span>
           <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
         <div class="faq-answer">
           <div class="answer-content">
-            <p>Usualmente el trámite se completa en 24 a 48 horas hábiles una vez presentados los documentos correctamente firmados. Somos especialistas en agilizar el circuito en el Registro Público local.</p>
+            <p>El trámite express en Córdoba y Mendoza se completa usualmente en 24 a 48 horas hábiles una vez presentados los documentos electrónicos. Somos especialistas en agilizar el circuito en las inspecciones de personas jurídicas (IPJ y DPJ).</p>
           </div>
         </div>
       </div>
@@ -159,7 +159,7 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initFAQ() {
     const faqItems = document.querySelectorAll('.faq-item');
 
     faqItems.forEach(item => {
@@ -178,5 +178,15 @@
         }
       });
     });
-  });
+  }
+
+  // Use astro:page-load to support ViewTransitions
+  document.addEventListener('astro:page-load', initFAQ);
+  
+  // Also run on initial load for non-transition navigations
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFAQ);
+  } else {
+    initFAQ();
+  }
 </script>

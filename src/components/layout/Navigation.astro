@@ -1,20 +1,35 @@
 ---
 import ThemeToggle from '../ui/ThemeToggle.astro';
+
+const pathname = Astro.url.pathname;
+const isMendoza = pathname.includes('mendoza');
+const isCordoba = pathname.includes('cordoba');
+const isRegional = isMendoza || isCordoba;
 ---
 
 <header class="navbar" id="main-navbar">
   <div class="container nav-content">
     <a href="/" class="brand">
-      <span class="brand-text">SAS <span class="text-gold">Tucumán</span></span>
+      <span class="brand-text">Estudio <span class="text-gold">SAS</span></span>
     </a>
     
     <nav class="desktop-nav">
       <ul id="nav-list">
-        <li><a href="#que-es"    class="nav-link" data-section="que-es">¿Qué es?</a></li>
-        <li><a href="#proceso"   class="nav-link" data-section="proceso">Proceso</a></li>
-        <li><a href="#honorarios" class="nav-link" data-section="honorarios">Honorarios</a></li>
-        <li><a href="#articulos" class="nav-link" data-section="articulos">Artículos</a></li>
-        <li><a href="#faq"       class="nav-link" data-section="faq">Preguntas</a></li>
+        {isRegional ? (
+          <>
+            <li><a href="#quienes-somos" class="nav-link" data-section="quienes-somos">¿Quiénes somos?</a></li>
+            <li><a href="#proceso" class="nav-link" data-section="proceso">Proceso</a></li>
+            <li><a href="#honorarios" class="nav-link" data-section="honorarios">Honorarios</a></li>
+            <li><a href="#faq" class="nav-link" data-section="faq">Dudas</a></li>
+            <li><a href="/blog" class="nav-link">Blog</a></li>
+          </>
+        ) : (
+          <>
+            <li><a href="/cordoba" class="nav-link">Córdoba</a></li>
+            <li><a href="/mendoza" class="nav-link">Mendoza</a></li>
+            <li><a href="/blog" class="nav-link">Blog</a></li>
+          </>
+        )}
       </ul>
       <!-- Indicador deslizante dorado -->
       <div class="nav-indicator" id="nav-indicator"></div>

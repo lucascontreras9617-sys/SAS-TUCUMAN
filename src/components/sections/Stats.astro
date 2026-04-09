@@ -92,39 +92,51 @@
   }
 </style>
 
-<script is:inline>
-  function animateCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    
-    counters.forEach(counter => {
-      const target = parseInt(counter.getAttribute('data-target') || '0');
-      const suffix = counter.getAttribute('data-suffix') || '';
-      const duration = 1800;
-      const startTime = performance.now();
+<script>
+  function initStats() {
+    function animateCounters() {
+      const counters = document.querySelectorAll('.stat-number');
+      
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target') || '0');
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const duration = 1800;
+        const startTime = performance.now();
 
-      function update(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // Easing: ease-out cubic
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.floor(eased * target);
-        counter.textContent = current + suffix;
-        if (progress < 1) requestAnimationFrame(update);
-      }
+        function update(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Easing: ease-out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(eased * target);
+          counter.textContent = current + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
 
-      requestAnimationFrame(update);
-    });
+        requestAnimationFrame(update);
+      });
+    }
+
+    // Disparar cuando la sección entre en viewport
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          animateCounters();
+          observer.disconnect();
+        }
+      }, { threshold: 0.3 });
+      observer.observe(statsSection);
+    }
   }
 
-  // Disparar cuando la sección entre en viewport
-  const statsSection = document.querySelector('.stats-section');
-  if (statsSection) {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        animateCounters();
-        observer.disconnect();
-      }
-    }, { threshold: 0.3 });
-    observer.observe(statsSection);
+  // Use astro:page-load to support ViewTransitions
+  document.addEventListener('astro:page-load', initStats);
+  
+  // Also run on initial load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStats);
+  } else {
+    initStats();
   }
 </script>

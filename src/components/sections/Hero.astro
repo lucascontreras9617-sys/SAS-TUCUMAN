@@ -1,44 +1,47 @@
 ---
+import LocationSelector from '../ui/LocationSelector.astro';
 ---
 <section class="hero-section" id="hero">
   <div class="container hero-content">
     <div class="hero-text-wrapper reveal">
-      <div class="badge font-sans animate-fade-in-up">Estudio de Abogados · Tucumán</div>
-      <h1 class="animate-fade-in-up delay-100">
-        Sociedades por <br />
-        <span class="text-gradient">Acciones Simplificadas</span>
+      <div class="badge font-sans animate-fade-in-up">Estudio Legal · Córdoba · Mendoza</div>
+      <h1 class="animate-reveal">
+        Constitución de SAS <br />
+        <span class="text-gradient">a Medida</span>
       </h1>
-      <p class="hero-description font-sans animate-fade-in-up delay-300">
-        Constituí tu SAS en <i>Tucumán</i> de forma rápida, segura y con el 
-        respaldo de profesionales del derecho. Acelerá el crecimiento 
-        de tu negocio con sólidas bases legales.
+      <p class="hero-description font-sans animate-fade-in-up delay-200">
+        Transformamos la complejidad legal en agilidad para tu negocio. Constitución express de Sociedades en <strong>Córdoba</strong> y <strong>Mendoza</strong> con asesoramiento experto 100% digital.
       </p>
       
       <div class="hero-actions animate-fade-in-up delay-400">
-        <a href="#contacto" class="btn-primary">
-          Constituir mi SAS
+        <a href="#provincias" class="btn-primary">
+          Iniciar Trámite
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: 8px;">
             <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <a href="#beneficios" class="btn-secondary">Conocer Beneficios</a>
+        <a href="#quienes-somos" class="btn-secondary">Conocer Beneficios</a>
+      </div>
+
+      <div id="provincias">
+        <LocationSelector />
       </div>
       
       <div class="hero-trust-indicators animate-fade-in-up delay-500">
         <div class="indicator">
-          <span class="value">24h</span>
+          <span class="value">24-48h</span>
           <span class="label">Constitución ágil</span>
         </div>
         <div class="divider"></div>
         <div class="indicator">
           <span class="value">100%</span>
-          <span class="label">Legal & Transparente</span>
+          <span class="label">Digital & Legal</span>
         </div>
         <div class="divider"></div>
         <div class="indicator">
-          <span class="value">Local</span>
-          <span class="label">Radicados en S.M. de Tucumán</span>
+          <span class="value">Federal</span>
+          <span class="label">Cobertura Nacional</span>
         </div>
       </div>
     </div>

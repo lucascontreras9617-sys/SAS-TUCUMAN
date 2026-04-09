@@ -1,0 +1,135 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  // 'home' | 'cordoba' | 'mendoza'
+  locationContext: 'home' | 'cordoba' | 'mendoza'; 
+  image?: string; 
+}
+
+const { 
+  title, 
+  description, 
+  canonicalUrl, 
+  locationContext, 
+  image = '/og-image-default.jpg' 
+} = Astro.props;
+
+// Configuración Base de la Marca
+const BRAND_NAME = "Estudio SAS";
+const SITE_URL = "https://estudiosas.com.ar"; // Asumiendo .com.ar, ajustar si es .com
+const WHATSAPP_NUMBER = "+54-9-381-401-1766";
+
+// Lógica de Contenido Dinámico según Ubicación
+let seoTitle = title || `${BRAND_NAME} - Constitución de SAS Online en Argentina`;
+let seoDescription = description || "Constituimos tu Sociedad por Acciones Simplificada (SAS) 100% online. Rápido, seguro y sin burocracia. Servicio especializado en Córdoba, Mendoza y todo el país.";
+let ogImage = image;
+
+// Datos Estructurados (Schema.org) por defecto (Organization)
+let schemaJson: any = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": BRAND_NAME,
+  "url": SITE_URL,
+  "logo": `${SITE_URL}/logo.png`,
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": WHATSAPP_NUMBER,
+    "contactType": "customer service",
+    "areaServed": "AR",
+    "availableLanguage": "Spanish"
+  }
+};
+
+// Sobrescribir si es una Landing Local
+if (locationContext === 'cordoba') {
+  seoTitle = title || "Constitución de SAS en Córdoba | Trámite Express IPJ | " + BRAND_NAME;
+  seoDescription = description || "Creamos tu SAS en Córdoba en 24-48hs. Integración con IPJ Córdoba y CiDi Nivel 2. Modelo Tailor-Made con Vesting y Tag Along. Sin moverte de tu oficina.";
+  
+  // Schema Específico para Servicio Legal en Córdoba
+  schemaJson = {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": `${BRAND_NAME} Córdoba`,
+    "image": `${SITE_URL}/og-cordoba.jpg`,
+    "description": "Servicio especializado en constitución de Sociedades por Acciones Simplificadas (SAS) en la provincia de Córdoba a través de la Inspección de Personas Jurídicas (IPJ).",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Córdoba",
+      "addressRegion": "Córdoba",
+      "addressCountry": "AR"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Córdoba"
+    },
+    "priceRange": "$$",
+    "telephone": WHATSAPP_NUMBER,
+    "url": `${SITE_URL}/cordoba`,
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  };
+
+} else if (locationContext === 'mendoza') {
+  seoTitle = title || "SAS en Mendoza | Sin Gastos de Boletín Oficial | " + BRAND_NAME;
+  seoDescription = description || "Constituimos tu SAS en Mendoza usando la plataforma Mendoza por Mí. Ahorrá el 50% en tasas y pagá $0 de Boletín Oficial. Trámite 100% digital y seguro.";
+  
+  // Schema Específico para Servicio Legal en Mendoza
+  schemaJson = {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": `${BRAND_NAME} Mendoza`,
+    "image": `${SITE_URL}/og-mendoza.jpg`,
+    "description": "Expertos en formación de SAS en Mendoza mediante la Dirección de Personas Jurídicas y Ventanilla Única MxM. Bonificaciones impositivas vigentes 2026.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mendoza",
+      "addressRegion": "Mendoza",
+      "addressCountry": "AR"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Mendoza"
+    },
+    "priceRange": "$$",
+    "telephone": WHATSAPP_NUMBER,
+    "url": `${SITE_URL}/mendoza`,
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  };
+}
+
+// Canonical URL fallback
+const finalCanonical = canonicalUrl || Astro.url.href;
+---
+
+<!-- Head Injection -->
+<title>{seoTitle}</title>
+<meta name="description" content={seoDescription} />
+<link rel="canonical" href={finalCanonical} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={finalCanonical} />
+<meta property="og:title" content={seoTitle} />
+<meta property="og:description" content={seoDescription} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={finalCanonical} />
+<meta property="twitter:title" content={seoTitle} />
+<meta property="twitter:description" content={seoDescription} />
+<meta property="twitter:image" content={ogImage} />
+
+<!-- JSON-LD Schema Injection -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaJson)} />

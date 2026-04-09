@@ -1,0 +1,30 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import GlassCard from '@components/ui/GlassCard.astro';
+
+const testimonios = [
+  { texto: 'Increíble la rapidez. En menos de una semana ya tenía mi CUIT y la sociedad inscripta. Muy profesionales.', autor: 'Marcos G., Emprendedor Tech' },
+  { texto: 'Excelente atención. Me explicaron todo el proceso y las ventajas impositivas en la provincia. Muy recomendados.', autor: 'Lucía M., Comercio Minorista' },
+  { texto: 'Trámite 100% online como prometieron. No tuve que pisar un juzgado ni una oficina. Totalmente recomendados.', autor: 'Juan P., Consultor IT' }
+];
+---
+
+<section class="py-28 px-6 md:px-8 bg-surface">
+  <div class="max-w-7xl mx-auto space-y-14">
+    <div class="text-center reveal">
+      <h2 class="text-4xl font-headline font-bold text-white">Lo que dicen nuestros clientes</h2>
+      <p class="text-on-surface/45 font-label uppercase tracking-widest text-xs mt-3">Emprendedores tucumanos que ya operan legalmente</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      {testimonios.map((t, idx) => (
+        <GlassCard class="testimonial-card p-8 space-y-6 hover:translate-y-[-6px] transition-all duration-300 reveal reveal-delay-${idx+1}">
+          <div class="flex text-primary gap-1">
+            {[...Array(5)].map((_, i) => <Icon name="star" fill size={20} key={i} />)}
+          </div>
+          <blockquote class="italic text-on-surface/80 font-headline text-lg leading-relaxed">"{t.texto}"</blockquote>
+          <footer class="text-xs font-label font-bold uppercase tracking-widest text-primary/80">— {t.autor}</footer>
+        </GlassCard>
+      ))}
+    </div>
+  </div>
+</section>

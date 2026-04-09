@@ -4,7 +4,7 @@ description: "Publicación obligatoria que dota de publicidad y oponibilidad a t
 date: 2026-04-02
 ---
 
-El **Edicto** es un pronunciamiento de orden público que se inserta en el Boletín Oficial (en este caso, de la provincia de Tucumán) mediante el cual se da a conocer a la comunidad la constitución, modificación o disolución de una entidad societaria.
+El **Edicto** es un pronunciamiento de orden público que se inserta en el Boletín Oficial (de la jurisdicción correspondiente) mediante el cual se da a conocer a la comunidad la constitución, modificación o disolución de una entidad societaria.
 
 ### Importancia en la SAS
 

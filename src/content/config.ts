@@ -15,7 +15,7 @@ const articulosCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.date(),
-    author: z.string().default('Estudio SAS Tucumán'),
+    author: z.string().default('Estudio SAS'),
     category: z.string().default('Derecho Societario'),
   })
 });

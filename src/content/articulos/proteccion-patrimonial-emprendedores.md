@@ -2,13 +2,13 @@
 title: "Protección Patrimonial: Por Qué Tu Negocio Necesita una SAS"
 description: "Cómo la constitución de una SAS separa tu patrimonio personal de los riesgos empresariales y protege tu futuro financiero."
 date: 2026-03-28
-author: "Estudio SAS Tucumán"
+author: "Estudio SAS"
 category: "Protección Patrimonial"
 ---
 
 ## El riesgo de operar sin sociedad
 
-Muchos emprendedores en Tucumán operan como **Responsables Inscriptos** sin ser conscientes del riesgo que esto implica. Al no contar con una persona jurídica separada, tu patrimonio personal —tu casa, tu auto, tus ahorros— queda expuesto ante cualquier reclamo de acreedores comerciales.
+Muchos emprendedores operan como **Responsables Inscriptos** sin ser conscientes del riesgo que esto implica. Al no contar con una persona jurídica separada, tu patrimonio personal —tu casa, tu auto, tus ahorros— queda expuesto ante cualquier reclamo de acreedores comerciales.
 
 ## La SAS como escudo patrimonial
 

@@ -7,26 +7,26 @@ interface Props {
 
 const { 
   title, 
-  description = "Constituí tu Sociedad por Acciones Simplificada (SAS) en Tucumán con rapidez y respaldo legal de primer nivel.", 
+  description = "Constituí tu Sociedad por Acciones Simplificada (SAS) de forma rápida, 100% digital y con respaldo legal de primer nivel en Argentina.", 
   image = "/og-image.jpg" 
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://sastucuman.com.ar');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://sasargentina.com.ar');
 
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "LegalService",
-  "name": "Quiet Luxury Legal - SAS Tucumán",
-  "image": "https://sastucuman.com.ar/logo.jpg",
+  "name": "SAS Argentina - Legal-Tech",
+  "image": "https://sasargentina.com.ar/logo.jpg",
   "description": description,
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": "San Miguel de Tucumán",
-    "addressRegion": "Tucumán",
+    "addressLocality": "Córdoba / Mendoza",
+    "addressRegion": "Argentina",
     "addressCountry": "AR"
   },
-  "url": typeof Astro.site === 'string' ? Astro.site : 'https://sastucuman.com.ar',
-  "telephone": "+5493810000000",
+  "url": typeof Astro.site === 'string' ? Astro.site : 'https://sasargentina.com.ar',
+  "telephone": "+5493816447082",
   "priceRange": "$$"
 };
 ---

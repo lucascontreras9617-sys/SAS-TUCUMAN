@@ -1,4 +1,36 @@
 ---
+interface Props {
+  province?: 'cordoba' | 'mendoza';
+}
+
+const { province } = Astro.props;
+
+const commonBadges = [
+  { text: 'AFIP', style: 'italic' },
+  { text: 'Ley 27.349 (Capital Emprendedor)', style: 'span' },
+  { text: 'Firma Digital Certificada', style: 'span' },
+];
+
+const regionalBadges = {
+  cordoba: [
+    { text: 'IPJ Córdoba', style: 'italic' },
+    { text: 'CiDi Nivel 2', style: 'span' },
+    { text: 'Bancor', style: 'italic' },
+  ],
+  mendoza: [
+    { text: 'DPJ Mendoza', style: 'italic' },
+    { text: 'Mendoza por Mí (MxM)', style: 'span' },
+    { text: 'Ventanilla Única E-SAS', style: 'italic' },
+  ],
+  default: [
+    { text: 'Inspección de Personas Jurídicas', style: 'italic' },
+    { text: 'Registro Público', style: 'span' },
+    { text: 'Mendoza por Mí', style: 'span' },
+    { text: 'CiDi Nivel 2', style: 'span' },
+  ]
+};
+
+const displayBadges = [...commonBadges, ...(province ? regionalBadges[province] : regionalBadges.default)];
 ---
 <section class="trust-badges-section">
   <div class="container">
@@ -7,44 +39,18 @@
       <div class="marquee">
         <!-- Bloque duplicado para el scroll infinito -->
         <div class="marquee-content">
-          <div class="badge-item">
-            <i>Inspección General de Justicia</i>
-          </div>
-          <div class="badge-item">
-            <span>Registro Público de Comercio</span>
-          </div>
-          <div class="badge-item">
-            <i>AFIP</i>
-          </div>
-          <div class="badge-item">
-            <span>Ley 27.349 (Apoyo al Capital Emprendedor)</span>
-          </div>
-          <div class="badge-item">
-            <i>Colegio de Abogados de Tucumán</i>
-          </div>
-          <div class="badge-item">
-            <span>Firma Digital Certificada</span>
-          </div>
+          {displayBadges.map((badge) => (
+            <div class="badge-item">
+              {badge.style === 'italic' ? <i>{badge.text}</i> : <span>{badge.text}</span>}
+            </div>
+          ))}
         </div>
         <div class="marquee-content" aria-hidden="true">
-          <div class="badge-item">
-            <i>Inspección General de Justicia</i>
-          </div>
-          <div class="badge-item">
-            <span>Registro Público de Comercio</span>
-          </div>
-          <div class="badge-item">
-            <i>AFIP</i>
-          </div>
-          <div class="badge-item">
-            <span>Ley 27.349 (Apoyo al Capital Emprendedor)</span>
-          </div>
-          <div class="badge-item">
-            <i>Colegio de Abogados de Tucumán</i>
-          </div>
-          <div class="badge-item">
-            <span>Firma Digital Certificada</span>
-          </div>
+          {displayBadges.map((badge) => (
+            <div class="badge-item">
+              {badge.style === 'italic' ? <i>{badge.text}</i> : <span>{badge.text}</span>}
+            </div>
+          ))}
         </div>
       </div>
     </div>

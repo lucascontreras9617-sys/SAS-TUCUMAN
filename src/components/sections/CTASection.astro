@@ -5,7 +5,7 @@
     <div class="cta-box glass-panel reveal">
       <div class="cta-content">
         <h2>Da el siguiente paso legal</h2>
-        <p>¿Listo para constituir tu empresa en Tucumán con total resguardo patrimonial? Nuestro equipo jurídico está listo para asesorarte.</p>
+        <p>¿Listo para constituir tu empresa con total resguardo patrimonial? Nuestro equipo jurídico está listo para asesorarte en Córdoba y Mendoza.</p>
         
         <form class="contact-form" id="main-contact-form">
           <div class="form-group">
@@ -154,7 +154,7 @@
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initContactForm() {
     const form = document.getElementById('main-contact-form') as HTMLFormElement;
     const msgDiv = document.getElementById('form-message');
     const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
@@ -194,5 +194,15 @@
         }
       });
     }
-  });
+  }
+
+  // Use astro:page-load to support ViewTransitions
+  document.addEventListener('astro:page-load', initContactForm);
+  
+  // Also run on initial load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm);
+  } else {
+    initContactForm();
+  }
 </script>
