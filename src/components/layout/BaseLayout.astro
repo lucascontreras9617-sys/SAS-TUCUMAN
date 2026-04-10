@@ -24,18 +24,32 @@ const { title } = Astro.props;
     <SEO title={title} />
     <ViewTransitions />
 
-    <!-- Previene FOUC (Flash of Unstyled Content) de los temas -->
+    <!-- Theme init: runs before first paint and is re-applied on every ViewTransition -->
     <script is:inline>
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-          return 'light';
-        }
-        return 'dark';
+      // Apply theme from localStorage (or system preference) immediately
+      (function() {
+        var saved = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
+        var theme = saved
+          ? saved
+          : window.matchMedia('(prefers-color-scheme: light)').matches
+            ? 'light'
+            : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
       })();
-      document.documentElement.setAttribute('data-theme', theme);
+
+      // Before ViewTransition swaps the DOM, copy the current theme to the new document
+      document.addEventListener('astro:before-swap', function(e) {
+        var current = document.documentElement.getAttribute('data-theme')
+          || localStorage.getItem('theme')
+          || 'dark';
+        e.newDocument.documentElement.setAttribute('data-theme', current);
+      });
+
+      // After swap, re-apply from localStorage as safety net
+      document.addEventListener('astro:after-swap', function() {
+        var saved = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', saved);
+      });
     </script>
   </head>
   <body>
