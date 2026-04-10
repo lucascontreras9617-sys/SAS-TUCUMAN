@@ -21,6 +21,18 @@ import CTASection from '../components/sections/CTASection.astro';
     description="Creá tu SAS en Córdoba en 24-48hs. Integración total con IPJ y CiDi Nivel 2. Modelos Tailor-Made para startups y bonificación en Bancor."
   />
 
+  <!-- Full-width city banner -->
+  <div class="city-banner reveal">
+    <img
+      src="/images/regions/cordoba2.jpg"
+      alt="Ciudad de Córdoba, Argentina"
+      class="city-banner-img"
+    />
+    <div class="city-banner-overlay">
+      <span class="city-banner-label">Córdoba, Argentina</span>
+    </div>
+  </div>
+
   <section class="hero-section regional-hero">
     <div class="container hero-content">
       <div class="hero-text-wrapper reveal">
@@ -41,26 +53,9 @@ import CTASection from '../components/sections/CTASection.astro';
 
         <ul class="local-highlights">
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17L4 12"/></svg> Integración total con CiDi Nivel 2</li>
-          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17L4 12"/></svg> Modelo Tailor-Made (Vesting & Tag Along)</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17L4 12"/></svg> Modelo Tailor-Made (Vesting &amp; Tag Along)</li>
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17L4 12"/></svg> CUIT automático interoperabilidad AFIP</li>
         </ul>
-      </div>
-
-      <div class="hero-visual reveal">
-        <div class="image-wrapper glass-panel">
-          <img src="/images/regions/cordoba.png" alt="La Cañada en Córdoba Capital" class="region-image" />
-          <div class="feature-overlay">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="32" height="32">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-              </svg>
-            </div>
-            <div class="overlay-text">
-              <h3>Velocidad IPJ</h3>
-              <p>Aprobación en 24-48hs hábiles.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -99,8 +94,56 @@ import CTASection from '../components/sections/CTASection.astro';
 </BaseLayout>
 
 <style>
+  /* ===== CITY BANNER ===== */
+  .city-banner {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    margin-top: 72px; /* nav height offset */
+  }
+
+  .city-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+    display: block;
+    transition: transform 8s ease;
+  }
+
+  .city-banner:hover .city-banner-img {
+    transform: scale(1.03);
+  }
+
+  .city-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15) 0%,
+      rgba(0,0,0,0.45) 60%,
+      rgba(0,0,0,0.72) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem 2.5rem;
+  }
+
+  .city-banner-label {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    border-left: 2px solid var(--accent-gold);
+    padding-left: 0.75rem;
+  }
+
+  /* ===== REGIONAL HERO ===== */
   .regional-hero {
-    padding: 160px 0 100px;
+    padding: 80px 0 100px;
     background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
   }
   
@@ -117,68 +160,15 @@ import CTASection from '../components/sections/CTASection.astro';
     gap: 12px;
     font-size: 0.95rem;
     color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+
+  .local-highlights li:hover {
+    color: var(--text-primary);
   }
 
   .local-highlights li svg {
     color: var(--accent-gold);
-  }
-
-  .hero-visual {
-    display: flex;
-    justify-content: center;
-    position: relative;
-  }
-
-  .image-wrapper {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-    width: 100%;
-    max-width: 450px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  }
-
-  .region-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-  }
-
-  .image-wrapper:hover .region-image {
-    transform: scale(1.05);
-  }
-
-  .feature-overlay {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    border-radius: 15px;
-    padding: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    z-index: 2;
-  }
-
-  .overlay-text h3 {
-    font-size: 1rem;
-    margin-bottom: 2px;
-    color: var(--text-primary);
-  }
-
-  .overlay-text p {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    margin: 0;
-  }
-
-  .card-icon {
     flex-shrink: 0;
   }
 
@@ -199,6 +189,13 @@ import CTASection from '../components/sections/CTASection.astro';
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 1.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
   }
 
   .footer {
