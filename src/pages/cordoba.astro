@@ -14,7 +14,7 @@ import CTASection from '../components/sections/CTASection.astro';
 // Custom Hero for Córdoba
 ---
 
-<BaseLayout title="SAS en Córdoba | Trámite Online Express IPJ">
+<BaseLayout title="SAS en Córdoba | Trámite Online Express IPJ" localSEO={true}>
   <LocalSEOHead 
     locationContext="cordoba" 
     title="SAS en Córdoba | Trámite Online Express IPJ | Estudio SAS"
@@ -63,7 +63,7 @@ import CTASection from '../components/sections/CTASection.astro';
   <TrustBadges province="cordoba" />
   <QueEsSAS />
   <Proceso />
-  <Precios />
+  <Precios provincia="cordoba" />
   <FAQ />
   <ArticulosSection />
   <CTASection />

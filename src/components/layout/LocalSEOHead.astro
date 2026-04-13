@@ -13,18 +13,18 @@ const {
   description, 
   canonicalUrl, 
   locationContext, 
-  image = '/og-image-default.jpg' 
+  image = '/og-image.jpg' 
 } = Astro.props;
 
 // Configuración Base de la Marca
 const BRAND_NAME = "Estudio SAS";
-const SITE_URL = "https://estudiosas.com.ar"; // Asumiendo .com.ar, ajustar si es .com
+const SITE_URL = Astro.site ? Astro.site.toString() : "https://estudiosas.com.ar";
 const WHATSAPP_NUMBER = "+54-9-381-401-1766";
 
 // Lógica de Contenido Dinámico según Ubicación
 let seoTitle = title || `${BRAND_NAME} - Constitución de SAS Online en Argentina`;
-let seoDescription = description || "Constituimos tu Sociedad por Acciones Simplificada (SAS) 100% online. Rápido, seguro y sin burocracia. Servicio especializado en Córdoba, Mendoza y todo el país.";
-let ogImage = image;
+let seoDescription = description || "Constituimos tu Sociedad por Acciones Simplificada (SAS) 100% online. Rápido, seguro y sin burocracia. Servicio especializado en Córdoba y Mendoza.";
+let ogImage = new URL(image, Astro.site).toString();
 
 // Datos Estructurados (Schema.org) por defecto (Organization)
 let schemaJson: any = {
@@ -32,7 +32,7 @@ let schemaJson: any = {
   "@type": "Organization",
   "name": BRAND_NAME,
   "url": SITE_URL,
-  "logo": `${SITE_URL}/logo.png`,
+  "logo": new URL("/logo.jpg", Astro.site).toString(),
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": WHATSAPP_NUMBER,
@@ -52,7 +52,7 @@ if (locationContext === 'cordoba') {
     "@context": "https://schema.org",
     "@type": "LegalService",
     "name": `${BRAND_NAME} Córdoba`,
-    "image": `${SITE_URL}/og-cordoba.jpg`,
+    "image": new URL("/og-image.jpg", Astro.site).toString(),
     "description": "Servicio especializado en constitución de Sociedades por Acciones Simplificadas (SAS) en la provincia de Córdoba a través de la Inspección de Personas Jurídicas (IPJ).",
     "address": {
       "@type": "PostalAddress",
@@ -66,7 +66,7 @@ if (locationContext === 'cordoba') {
     },
     "priceRange": "$$",
     "telephone": WHATSAPP_NUMBER,
-    "url": `${SITE_URL}/cordoba`,
+    "url": new URL("/cordoba", Astro.site).toString(),
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -84,7 +84,7 @@ if (locationContext === 'cordoba') {
     "@context": "https://schema.org",
     "@type": "LegalService",
     "name": `${BRAND_NAME} Mendoza`,
-    "image": `${SITE_URL}/og-mendoza.jpg`,
+    "image": new URL("/og-image.jpg", Astro.site).toString(),
     "description": "Expertos en formación de SAS en Mendoza mediante la Dirección de Personas Jurídicas y Ventanilla Única MxM. Bonificaciones impositivas vigentes 2026.",
     "address": {
       "@type": "PostalAddress",
@@ -98,7 +98,7 @@ if (locationContext === 'cordoba') {
     },
     "priceRange": "$$",
     "telephone": WHATSAPP_NUMBER,
-    "url": `${SITE_URL}/mendoza`,
+    "url": new URL("/mendoza", Astro.site).toString(),
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -109,7 +109,7 @@ if (locationContext === 'cordoba') {
 }
 
 // Canonical URL fallback
-const finalCanonical = canonicalUrl || Astro.url.href;
+const finalCanonical = canonicalUrl || new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!-- Head Injection -->

@@ -12,7 +12,7 @@ import ArticulosSection from '../components/sections/ArticulosSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
 ---
 
-<BaseLayout title="SAS en Mendoza | Sin Gastos de Boletín | Trámite MxM">
+<BaseLayout title="SAS en Mendoza | Sin Gastos de Boletín | Trámite MxM" localSEO={true}>
   <LocalSEOHead 
     locationContext="mendoza" 
     title="SAS en Mendoza | Sin Gastos de Boletín | Estudio SAS"
@@ -60,7 +60,7 @@ import CTASection from '../components/sections/CTASection.astro';
   <TrustBadges province="mendoza" />
   <QueEsSAS />
   <Proceso />
-  <Precios />
+  <Precios provincia="mendoza" />
   <FAQ />
   <ArticulosSection />
   <CTASection />

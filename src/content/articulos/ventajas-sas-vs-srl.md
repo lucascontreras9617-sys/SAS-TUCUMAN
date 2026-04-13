@@ -12,7 +12,7 @@ A la hora de formalizar un emprendimiento, una de las preguntas más frecuentes 
 
 ## Capital Social Mínimo
 
-La **SAS** requiere un capital social mínimo equivalente a **dos salarios mínimos**, mientras que la SRL no tiene un monto mínimo legal pero en la práctica los registros suelen exigir montos superiores. Esto hace a la SAS más accesible para emprendedores que están comenzando.
+La **SAS** requiere un [capital social](/glosario/capital-social) mínimo equivalente a **dos salarios mínimos**, mientras que la SRL no tiene un monto mínimo legal pero en la práctica los registros suelen exigir montos superiores. Esto hace a la SAS más accesible para emprendedores que están comenzando.
 
 ## Constitución Digital
 

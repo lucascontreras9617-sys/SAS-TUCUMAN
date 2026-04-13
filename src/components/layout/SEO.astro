@@ -11,13 +11,13 @@ const {
   image = "/og-image.jpg" 
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://sasargentina.com.ar');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const schemaData = {
   "@context": "https://schema.org",
   "@type": "LegalService",
-  "name": "SAS Argentina - Legal-Tech",
-  "image": "https://sasargentina.com.ar/logo.jpg",
+  "name": "Estudio SAS - Legal-Tech",
+  "image": new URL("/logo.jpg", Astro.site).toString(),
   "description": description,
   "address": {
     "@type": "PostalAddress",
@@ -25,8 +25,8 @@ const schemaData = {
     "addressRegion": "Argentina",
     "addressCountry": "AR"
   },
-  "url": typeof Astro.site === 'string' ? Astro.site : 'https://sasargentina.com.ar',
-  "telephone": "+5493816447082",
+  "url": Astro.site.toString(),
+  "telephone": "+5493814011766",
   "priceRange": "$$"
 };
 ---
@@ -36,16 +36,16 @@ const schemaData = {
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={canonicalURL} />
-<meta property="og:title" content={`${title} | Quiet Luxury Legal`} />
+<meta property="og:title" content={`${title} | Estudio SAS`} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, canonicalURL)} />
+<meta property="og:image" content={new URL(image, Astro.site)} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={canonicalURL} />
-<meta property="twitter:title" content={`${title} | Quiet Luxury Legal`} />
+<meta property="twitter:title" content={`${title} | Estudio SAS`} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, canonicalURL)} />
+<meta property="twitter:image" content={new URL(image, Astro.site)} />
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

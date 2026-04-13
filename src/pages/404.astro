@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout title="404 — Página no encontrada" localSEO={true}>
+  <section class="error-page">
+    <div class="container container-404">
+      <div class="content reveal">
+        <h1 class="error-code font-display">404</h1>
+        <h2 class="error-title">Parece que te has perdido</h2>
+        <p class="error-message font-body">
+          La página que estás buscando no existe o ha sido movida. 
+          Pero no te preocupes, constituir tu sociedad es mucho más simple que encontrar esta URL.
+        </p>
+        
+        <div class="actions">
+          <a href="/" class="btn-primary">Volver al inicio</a>
+          <a href="/#proceso" class="btn-secondary">¿Cómo funciona?</a>
+        </div>
+      </div>
+      
+      <div class="background-decor" aria-hidden="true">
+        <div class="abstract-shape"></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .error-page {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 0;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .container-404 {
+    position: relative;
+    z-index: 2;
+  }
+
+  .error-code {
+    font-size: clamp(8rem, 20vw, 15rem);
+    line-height: 1;
+    font-weight: 800;
+    color: var(--accent-gold);
+    opacity: 0.15;
+    margin-bottom: -2rem;
+    pointer-events: none;
+    letter-spacing: -5px;
+  }
+
+  .error-title {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-family: var(--font-display);
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .error-message {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .background-decor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .abstract-shape {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+    filter: blur(60px);
+    border-radius: 50%;
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s var(--ease-out-expo);
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

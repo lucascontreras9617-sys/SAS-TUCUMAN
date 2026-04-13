@@ -1,4 +1,11 @@
 ---
+import CapitalMinimo from '../ui/CapitalMinimo.astro';
+
+interface Props {
+  provincia?: 'cordoba' | 'mendoza';
+}
+
+const { provincia } = Astro.props;
 ---
 <section class="pricing-section" id="honorarios">
   <div class="container">
@@ -79,6 +86,8 @@
         </div>
       </div>
     </div>
+    
+    <CapitalMinimo provincia={provincia} />
   </div>
 </section>
 

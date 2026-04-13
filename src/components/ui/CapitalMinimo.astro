@@ -1,0 +1,129 @@
+---
+interface Props {
+  provincia?: 'cordoba' | 'mendoza';
+}
+
+const { provincia } = Astro.props;
+
+const CAPITAL_MINIMO = "$715.600";
+const INTEGRACION_INICIAL = "$178.900";
+const MES_VIGENTE = "Abril 2026";
+
+const copyProvincia = provincia === 'cordoba' 
+  ? "Asegurá tu trámite en IPJ Córdoba ante los próximos aumentos del SMVM."
+  : provincia === 'mendoza'
+  ? "Aprovechá las exenciones de la Ley Impositiva 2026 en Mendoza iniciando hoy."
+  : "El capital mínimo se actualiza mensualmente con el SMVM.";
+---
+
+<div class="capital-minimo-card glass-panel reveal">
+  <div class="card-content">
+    <div class="header">
+      <span class="label font-display">Capital Mínimo Vigente · {MES_VIGENTE}</span>
+      <h3 class="amount font-display">{CAPITAL_MINIMO} <span class="currency">ARS</span></h3>
+    </div>
+    
+    <div class="info-grid">
+      <div class="info-item">
+        <p class="info-label">Integración inicial (25%)</p>
+        <p class="info-value text-gold">{INTEGRACION_INICIAL}*</p>
+      </div>
+      <div class="info-item">
+        <p class="info-label">Saldo restante</p>
+        <p class="info-value">Hasta 2 años</p>
+      </div>
+    </div>
+
+    <p class="urgency-note font-body">
+      {copyProvincia} <strong>Iniciá tu trámite en {MES_VIGENTE} para congelar este monto.</strong>
+    </p>
+    
+    <p class="disclaimer">
+      *Monto mínimo legal obligatorio (2 SMVM).
+    </p>
+  </div>
+</div>
+
+<style>
+  .capital-minimo-card {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid var(--accent-gold);
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .amount {
+    font-size: 3rem;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+  }
+
+  .currency {
+    font-size: 1rem;
+    opacity: 0.5;
+    font-weight: 400;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .info-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+  }
+
+  .info-value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .urgency-note {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .disclaimer {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    font-style: italic;
+  }
+
+  .text-gold {
+    color: var(--accent-gold);
+  }
+
+  @media (max-width: 480px) {
+    .amount { font-size: 2.2rem; }
+    .info-grid { grid-template-columns: 1fr; gap: 1rem; }
+  }
+</style>
